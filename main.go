@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/francoispqt/gojay"
@@ -52,7 +51,7 @@ func (c *Comic) UnmarshalJSONObject(dec *gojay.Decoder, key string) error {
 	return nil
 }
 
-// ===== [  ] ==========
+// ===== [ GET COMIC ] ==========
 
 func get(apiURL string) (c Comic) {
 	// Get data from XKCD api endpoint
@@ -68,7 +67,7 @@ func get(apiURL string) (c Comic) {
 	c = Comic{}
 	err = gojay.UnmarshalJSONObject(body, &c)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	return c
@@ -78,8 +77,18 @@ func getLatest() (c Comic) {
 	return get("https://xkcd.com/info.0.json")
 }
 
-// ===== [  ] ==========
+// ===== [ DUMP COMIC ] ==========
 
 func (c Comic) dump() {
-	fmt.Println(c)
+	fmt.Printf("XKCD #%d published on %s/%s/%s\n", c.Num, c.Month, c.Day, c.Year)
+	fmt.Println(c.Title)
+	fmt.Println(c.Alt)
+	fmt.Println(c.Img)
 }
+
+// func (c Comic) dump() {
+// 	fmt.Printf("XKCD #%d published on %s/%s/%s\n", c.Num, c.Month, c.Day, c.Year)
+// 	fmt.Println(c.Title)
+// 	fmt.Println(c.Alt)
+// 	fmt.Println(c.Img)
+// }
