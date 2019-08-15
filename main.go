@@ -19,19 +19,17 @@ func main() {
 
 // Comic is a struct that stores all information relevant to a comic
 type Comic struct {
-	Day       string
-	Month     string
-	Year      string
-	Num       int
-	Title     string
-	SafeTitle string
-	Link      string
-	Alt       string
-	Img       string
+	Day   string
+	Month string
+	Year  string
+	Num   int
+	Title string
+	Alt   string
+	Img   string
 }
 
 func (c *Comic) NKeys() int {
-	return 9
+	return 7
 }
 
 func (c *Comic) UnmarshalJSONObject(dec *gojay.Decoder, key string) error {
@@ -46,10 +44,6 @@ func (c *Comic) UnmarshalJSONObject(dec *gojay.Decoder, key string) error {
 		return dec.Int(&c.Num)
 	case "title":
 		return dec.String(&c.Title)
-	case "safe_title":
-		return dec.String(&c.SafeTitle)
-	case "link":
-		return dec.String(&c.Link)
 	case "alt":
 		return dec.String(&c.Alt)
 	case "img":
