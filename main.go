@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/francoispqt/gojay"
+	"github.com/skratchdot/open-golang/open"
 )
 
 // ===== [ MAIN ] ===============
@@ -83,12 +84,5 @@ func (c Comic) dump() {
 	fmt.Printf("XKCD #%d published on %s/%s/%s\n", c.Num, c.Month, c.Day, c.Year)
 	fmt.Println(c.Title)
 	fmt.Println(c.Alt)
-	fmt.Println(c.Img)
+	open.Run(c.Img)
 }
-
-// func (c Comic) dump() {
-// 	fmt.Printf("XKCD #%d published on %s/%s/%s\n", c.Num, c.Month, c.Day, c.Year)
-// 	fmt.Println(c.Title)
-// 	fmt.Println(c.Alt)
-// 	fmt.Println(c.Img)
-// }
